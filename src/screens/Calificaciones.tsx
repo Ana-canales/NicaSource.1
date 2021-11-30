@@ -51,6 +51,7 @@ const Calificaciones = () => {
         </View>
 
         <View style={styles.p}>
+        <View style={styles.separator}></View>
           <Text>{result.toString()}</Text>
         </View>
         <View style={styles.container2}>
@@ -102,6 +103,13 @@ const styles = StyleSheet.create({
         borderColor: '#8C8A8A',
         marginTop: 10,
         marginBottom: 10,
+      },
+      containerCalificacion:{
+        backgroundColor: "#C4C4C4",
+        justifyContent: 'center',
+        fontSize: 20,
+        marginTop:'1%',
+        
       },
       containerBase: {
         flex: 1,
