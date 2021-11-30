@@ -9,6 +9,8 @@ const Calificaciones = () => {
     const [IPnota, setIParcial] = useState('')
     const [IIPnota, setIIParcial] = useState('')
 
+    const [notaFinales, setnotaFinales] = useState<string[]>([])
+
     const [result, setResult] = useState<number>(0);
     
     const crearEstudiante = () => {
@@ -18,6 +20,8 @@ const Calificaciones = () => {
         setResult(notafinal);
 
         setEstudiantess([...estudiantess, estudiantes])
+        setnotaFinales([...notaFinales,notafinal.toString() ])
+        
     }
     // useEffect(crearEstudiante, [IIPnota]);
 
@@ -31,6 +35,7 @@ const Calificaciones = () => {
             onChangeText={setEstudiantes}
           />
         </View>
+        <View style={styles.fixToImput}>
 
         <View style={styles.p}>
           <TextInput placeholder={"IP"} 
@@ -47,17 +52,24 @@ const Calificaciones = () => {
         <View style={styles.p}>
           <Text>{result.toString()}</Text>
         </View>
-
+        <View style={styles.container2}>
         <Button color="#8C8A8A" 
         title="Agregar" 
         onPress={crearEstudiante}
          />
+         </View>
+         </View>
         <ScrollView>
           {
-          estudiantess.map((lista, index, resultado) => (
+        //   estudiantess.map((lista, index) => (
+        //     <View style={styles.container} key={index}>
+        //       <Text style={styles.text}>{lista}</Text>
+        //       <Text>Nota Final:{result.toString()}</Text>
+
+        estudiantess.map((estudiantess, index) => (
             <View style={styles.container} key={index}>
-              <Text style={styles.text}>{lista}</Text>
-              <Text>Nota Final:{result.toString()}</Text>
+                <Text style={styles.text} >{estudiantess}</Text>
+                <Text style={[notaFinales[index] < '60' ? styles.textReprobado : styles.textAprobado]}>Nota Final :{notaFinales[index]}</Text>
             </View>
           ))
           }
@@ -96,6 +108,14 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: "#FFFFFF",
       },
+    textReprobado: {
+        fontSize: 24,
+        color: '#B52222',
+    },
+    textAprobado: {
+        fontSize: 24,
+        color: '#05786A',
+    },
       p:{
         width: 50,
         flexDirection: "row",
@@ -109,5 +129,25 @@ const styles = StyleSheet.create({
         marginTop: 10,
         borderWidth: 3,
         borderColor: "#8C8A8A",
-      },
+    },
+    container1: {
+        width: '25%',
+        justifyContent: 'space-between',
+        marginBottom: 5,
+        paddingVertical: 5,
+        paddingHorizontal: 8,
+        borderRadius: 5,
+        marginLeft: 5,
+        borderColor: '#8C8A8A',
+        borderWidth: 3
+    },
+    fixToImput: {
+        flexDirection: 'row',
+    },
+    container2: {
+        width: '25%',
+        marginBottom: 5,
+        marginLeft: 5,
+
+    }
 });
