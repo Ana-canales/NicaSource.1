@@ -1,63 +1,69 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {StyleSheet, Text, View, Button,TextInput, ScrollView,} from "react-native";
 
 const Calificaciones = () => {
 
     const [estudiantess, setEstudiantess] = useState<string[]>([])
     const [estudiantes, setEstudiantes] = useState<string>('')
+
+    const [IPnota, setIParcial] = useState('')
+    const [IIPnota, setIIParcial] = useState('')
+
+    const [result, setResult] = useState<number>(0);
     
     const crearEstudiante = () => {
+
+        const divisor = 2;
+        const notafinal = (parseInt(IPnota) + parseInt(IIPnota)) / divisor;
+        setResult(notafinal);
+
         setEstudiantess([...estudiantess, estudiantes])
     }
+    // useEffect(crearEstudiante, [IIPnota]);
 
     return (
-        <View style={styles.containerBase}>
-             <Text style={styles.text}>Nombre del Estudiante</Text>
-            <View style={styles.container}>
-                <TextInput
-                    style={styles.inputs}
-                    placeholder={"Nombre del Estudiante"}
-                    onChangeText={setEstudiantes}
-                />
-            </View>
-            {/* <Text style={styles.text}>IP</Text> */}
-                 <TextInput
-                    style={styles.p}
-                    placeholder={"IP"}
-                    onChangeText={setEstudiantes}
-                    />
-                     <TextInput
-                    style={styles.p}
-                    placeholder={"IIP"}
-                    onChangeText={setEstudiantes}
-                    />
-                     <TextInput
-                    style={styles.p}
-                    placeholder={"NF"}
-                    onChangeText={setEstudiantes}
-                    />
-            
-            <Button
-                color="#8C8A8A"
-                    title="Agregar"
-                    onPress={crearEstudiante}
-                />
-            <View>
-                
-                
-            </View>
-            <ScrollView>
-
-                {
-                    estudiantess.map((lista, index) => (
-                        <View style={styles.container} key={index}>
-                            <Text style={styles.text} >{lista}</Text>
-                        </View>
-                    ))
-                }
-            </ScrollView>
+      <View style={styles.containerBase}>
+        <Text style={styles.text}>Nombre del Estudiante</Text>
+        <View style={styles.container}>
+          <TextInput
+            style={styles.inputs}
+            placeholder={"Nombre del Estudiante"}
+            onChangeText={setEstudiantes}
+          />
         </View>
-    )
+
+        <View style={styles.p}>
+          <TextInput placeholder={"IP"} 
+          onChangeText={setIParcial} 
+          />
+        </View>
+
+        <View style={styles.p}>
+          <TextInput placeholder={"IIP"} 
+          onChangeText={setIIParcial} 
+          />
+        </View>
+
+        <View style={styles.p}>
+          <Text>{result.toString()}</Text>
+        </View>
+
+        <Button color="#8C8A8A" 
+        title="Agregar" 
+        onPress={crearEstudiante}
+         />
+        <ScrollView>
+          {
+          estudiantess.map((lista, index, resultado) => (
+            <View style={styles.container} key={index}>
+              <Text style={styles.text}>{lista}</Text>
+              <Text>Nota Final:{result.toString()}</Text>
+            </View>
+          ))
+          }
+        </ScrollView>
+      </View>
+    );
 }
 
 export default Calificaciones
@@ -104,4 +110,4 @@ const styles = StyleSheet.create({
         borderWidth: 3,
         borderColor: "#8C8A8A",
       },
-    });
+});
