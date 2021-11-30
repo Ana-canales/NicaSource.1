@@ -23,7 +23,6 @@ const Calificaciones = () => {
         setnotaFinales([...notaFinales,notafinal.toString() ])
         
     }
-    // useEffect(crearEstudiante, [IIPnota]);
 
     return (
       <View style={styles.containerBase}>
@@ -61,10 +60,7 @@ const Calificaciones = () => {
          </View>
         <ScrollView>
           {
-        //   estudiantess.map((lista, index) => (
-        //     <View style={styles.container} key={index}>
-        //       <Text style={styles.text}>{lista}</Text>
-        //       <Text>Nota Final:{result.toString()}</Text>
+
 
         estudiantess.map((estudiantess, index) => (
             <View style={styles.container} key={index}>
