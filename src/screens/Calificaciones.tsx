@@ -3,6 +3,8 @@ import {StyleSheet, Text, View, Button,TextInput, ScrollView,} from "react-nativ
 
 const Calificaciones = () => {
 
+    const Separator = () => ( <View style={styles.separator} /> );
+
     const [estudiantess, setEstudiantess] = useState<string[]>([])
     const [estudiantes, setEstudiantes] = useState<string>('')
 
@@ -15,8 +17,8 @@ const Calificaciones = () => {
     
     const crearEstudiante = () => {
 
-        const divisor = 2;
-        const notafinal = (parseInt(IPnota) + parseInt(IIPnota)) / divisor;
+        const dividendo = 2;
+        const notafinal = (parseInt(IPnota) + parseInt(IIPnota)) / dividendo;
         setResult(notafinal);
 
         setEstudiantess([...estudiantess, estudiantes])
@@ -65,6 +67,7 @@ const Calificaciones = () => {
         estudiantess.map((estudiantess, index) => (
             <View style={styles.container} key={index}>
                 <Text style={styles.text} >{estudiantess}</Text>
+                <Separator />
                 <Text style={[notaFinales[index] < '60' ? styles.textReprobado : styles.textAprobado]}>Nota Final :{notaFinales[index]}</Text>
             </View>
           ))
@@ -144,6 +147,11 @@ const styles = StyleSheet.create({
         width: '25%',
         marginBottom: 5,
         marginLeft: 5,
+    },
+    separator: {
+        marginVertical: 8,
+        borderBottomColor: '#737373',
+        borderBottomWidth: StyleSheet.hairlineWidth,
 
     }
 });
